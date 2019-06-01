@@ -1,3 +1,3 @@
 # ListaGPS
-Lista GPS - Segunda Entrega
+Lista GPS - Sexta Entrega
 André Gianfratti
