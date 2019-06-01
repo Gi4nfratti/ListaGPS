@@ -8,29 +8,18 @@ class GPSContratos {
     static final String COLUMN_LONGITUDE = "longitude";
 
     static String criarTabela() {
-        StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(" CREATE TABLE ");
-        stringBuilder.append(TABLE_NAME);
-        stringBuilder.append(" ( ");
-        stringBuilder.append(COLUMN_ID);
-        stringBuilder.append(" INTEGER PRIMARY KEY, ");
-        stringBuilder.append(COLUMN_LATITUDE);
-        stringBuilder.append(" DOUBLE, ");
-        stringBuilder.append(COLUMN_LONGITUDE);
-        stringBuilder.append(" DOUBLE ");
-        stringBuilder.append(" ); ");
-
-        return stringBuilder.toString();
+        return String.format(" CREATE TABLE %s (%s INTEGER PRIMARY KEY, %s DOUBLE, %s DOUBLE);",
+                    GPSContratos.COLUMN_ID,
+                    GPSContratos.TABLE_NAME,
+                    GPSContratos.COLUMN_LATITUDE,
+                    GPSContratos.COLUMN_LONGITUDE
+                );
     }
 
     static String removerTabela() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        stringBuilder.append(" DROP TABLE ");
-        stringBuilder.append(TABLE_NAME);
-        stringBuilder.append("  ; ");
-
-        return stringBuilder.toString();
+        return String.format("DROP TABLE %s IF EXISTS",
+                GPSContratos.TABLE_NAME
+                );
     }
 }
