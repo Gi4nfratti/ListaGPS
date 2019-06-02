@@ -3,7 +3,7 @@ import {
   AngularFirestoreCollection,
   AngularFirestore
 } from "angularfire2/firestore";
-import { Subject } from "src/app/models/Subject";
+import { Subject } from "src/app/models/Subjects";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 

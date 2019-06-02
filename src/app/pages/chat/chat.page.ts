@@ -2,10 +2,10 @@ import { Component, OnInit } from "@angular/core";
 import { Chat } from "src/app/models/Chat";
 import { NavExtrasService } from "src/app/service/navigation/nav-extras.service";
 import { SessionService } from "src/app/service/session/session.service";
-import { Session } from "src/app/models/Session";
+import { Session } from "src/app/models/Sessoes";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LoadingController, NavController } from "@ionic/angular";
-import { Message } from "src/app/models/Message";
+import { Message } from "src/app/models/Mensagens";
 import { MessagesService } from "src/app/service/messages/messages.service";
 
 @Component({

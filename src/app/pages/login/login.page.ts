@@ -2,8 +2,8 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 
 import { SubjectService } from "src/app/service/subject/subject.service";
-import { Subject } from "src/app/models/Subject";
-import { Session } from "src/app/models/Session";
+import { Subject } from "src/app/models/Subjects";
+import { Session } from "src/app/models/Sessoes";
 import { SessionService } from "src/app/service/session/session.service";
 import { NavExtrasService } from "src/app/service/navigation/nav-extras.service";
 

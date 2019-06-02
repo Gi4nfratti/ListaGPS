@@ -3,7 +3,7 @@ import {
   AngularFirestoreCollection
 } from "angularfire2/firestore";
 import { Injectable } from "@angular/core";
-import { Session } from "src/app/models/Session";
+import { Session } from "src/app/models/Sessoes";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 

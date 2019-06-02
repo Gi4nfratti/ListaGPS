@@ -1,4 +1,4 @@
-import { User } from "./User";
+import { User } from "./Usuario";
 
 export interface Message {
   sendAt: number;
