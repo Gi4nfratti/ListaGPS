@@ -11,6 +11,12 @@ import br.usjt.ciclodevidagpsemapas.Model.Localizacao;
 
 public class LocalizacoesActivity extends AppCompatActivity {
 
+    /*
+    Aula 07 e 08 - Consumo Web Service
+    André Gianfratti
+    RA: 817114511
+    */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

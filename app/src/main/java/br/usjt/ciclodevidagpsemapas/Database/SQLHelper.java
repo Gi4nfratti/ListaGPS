@@ -6,6 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SQLHelper extends SQLiteOpenHelper {
 
+    /*
+    Aula 07 e 08 - Consumo Web Service
+    André Gianfratti
+    RA: 817114511
+    */
+
+
     private static final String DB_NAME = "gps";
     private static final int DB_VERSION = 1;
 

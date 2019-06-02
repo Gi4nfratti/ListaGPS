@@ -8,6 +8,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -20,11 +21,31 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import br.usjt.ciclodevidagpsemapas.Model.Previsao;
 import br.usjt.ciclodevidagpsemapas.R;
 import br.usjt.ciclodevidagpsemapas.Database.LocalizacaoDAO;
 import br.usjt.ciclodevidagpsemapas.Model.Localizacao;
 
 public class MainActivity extends AppCompatActivity {
+
+    /*
+    Aula 07 e 08 - Consumo Web Service
+    André Gianfratti
+    RA: 817114511
+    */
+
+
     private static final int REQUEST_LOCATION_GPS = 1001;
 
     private LocationManager locationManager;
@@ -51,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
                 double longitudeAtual = location.getLongitude();
 
                 locationTxt.setText(String.format(getString(R.string.main_label), latitudeAtual, longitudeAtual));
-                locationDAO.inputLocation(new Localizacao(latitudeAtual, longitudeAtual));
+                new GetPrevisoes().execute(latitudeAtual, longitudeAtual);
             }
 
             @Override
@@ -133,6 +154,44 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     }
+
+    @SuppressLint("StaticFieldLeak")
+    private class GetPrevisoes extends AsyncTask<Double, Void, Void> {
+
+        @Override
+        protected Void doInBackground(Double... endereco) {
+            try {
+                double latitude = endereco[0];
+                double longitude = endereco[1];
+                URL url = new URL(getString(R.string.service_apikey_url, latitude, longitude));
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                InputStream inputStream = connection.getInputStream();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder resultado = new StringBuilder();
+                String aux;
+
+                while ((aux = reader.readLine()) != null) {
+                    resultado.append(aux);
+                }
+
+                locationDAO.inputLocation(new Localizacao(latitude, latitude, lidaComJSON(resultado.toString())));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        private Previsao lidaComJSON(String json) throws JSONException {
+            JSONArray list = new JSONObject(json).getJSONArray("list");
+            JSONObject dia = list.getJSONObject(0);
+            JSONObject main = dia.getJSONObject("main");
+            JSONObject weather = dia.getJSONArray("weather").getJSONObject(0);
+            return new Previsao(dia.getLong("dt"),  main.getDouble("humidity"), weather.getString("description"), main.getDouble("temp_min"), main.getDouble("temp_max"));
+        }
+    }
+
 
     @Override
     protected void onStop() {
