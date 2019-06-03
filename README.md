@@ -1,2 +1,2 @@
-# Chat Ionic com Firebase
+# Chat Ionic
  Nona/Décima entrega André Gianfratti
