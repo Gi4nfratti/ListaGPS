@@ -1,7 +1,6 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { Chat } from "src/app/models/Chat";
-import { NavExtrasService } from "src/app/service/navigation/nav-extras.service";
 
 @Component({
   selector: "app-home",
@@ -24,17 +23,32 @@ export class HomePage {
     }
   ];
 
-  
+  private mensagensList = [
+    {
+      id: '1',
+      username: 'João',
+      mensagens: 'olá',
+    },
+    {
+      id: '2',
+      username: 'Maria',
+      mensagens: 'alguém online?'
+    },
+    {
+      id: '3',
+      username: 'Rita',
+      mensagens: 'estou chegando!'
+    }
+  ];
 
   chat: Chat = {
     subject: null,
     username: ""
   };
 
-  constructor(private _router: Router, private _navExtra: NavExtrasService) {}
+  constructor(private _router: Router) {}
 
   entrarNoChat() {
-    this._navExtra.setExtras(this.chat);
     this._router.navigate(["chat"]);
   }
 

@@ -1,19 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { Chat } from "src/app/models/Chat";
-import { NavExtrasService } from "src/app/service/navigation/nav-extras.service";
-import { SessionService } from "src/app/service/session/session.service";
 import { Session } from "src/app/models/Sessoes";
 import { ActivatedRoute, Router } from "@angular/router";
 import { LoadingController, NavController } from "@ionic/angular";
 import { Message } from "src/app/models/Mensagens";
-import { MessagesService } from "src/app/service/messages/messages.service";
 
 @Component({
   selector: "app-chat",
   templateUrl: "./chat.page.html",
   styleUrls: ["./chat.page.scss"]
 })
-export class ChatPage implements OnInit {
+export class ChatPage{
   session: Session;
 
   newMessageText: String;
@@ -21,20 +18,8 @@ export class ChatPage implements OnInit {
   messages: Message[];
 
   constructor(
-    private _navExtras: NavExtrasService,
-    private _messageService: MessagesService
   ) {
-    this.session = this._navExtras.getExtras();
     this.title = this.session.subject;
-  }
-
-  ngOnInit() {
-    this._messageService.index().subscribe(res => {
-      this.messages = res.sort((a, b) => {
-        if (a.sendAt < b.sendAt) return -1;
-        return 1;
-      });
-    });
   }
 
   check(item) {
@@ -52,8 +37,6 @@ export class ChatPage implements OnInit {
       user: this.session.user,
       text: this.newMessageText
     };
-
-    this._messageService.store(newMessage);
     this.messages = [...this.messages, newMessage];
     this.newMessageText = "";
   }
