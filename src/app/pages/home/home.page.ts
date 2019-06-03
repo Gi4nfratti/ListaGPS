@@ -24,6 +24,8 @@ export class HomePage {
     }
   ];
 
+  
+
   chat: Chat = {
     subject: null,
     username: ""

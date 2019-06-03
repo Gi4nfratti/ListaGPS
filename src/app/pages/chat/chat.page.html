@@ -13,24 +13,25 @@
       <div *ngIf="!check(message)">
         <ion-row>
           <ion-card>
-            <ion-card-content>
-              {{ message.text }}
-            </ion-card-content>
             <ion-card-header>
               <ion-card-subtitle>{{ message.user.name }}</ion-card-subtitle>
             </ion-card-header>
+            <ion-card-content>
+              {{ message.text }}
+            </ion-card-content>
           </ion-card>
         </ion-row>
       </div>
       <div *ngIf="check(message)">
         <ion-row justify-content-end text-right>
           <ion-card>
+              <ion-card-header>
+                  <ion-card-subtitle>{{ message.user.name }}</ion-card-subtitle>
+                </ion-card-header>
             <ion-card-content>
               {{ message.text }}
             </ion-card-content>
-            <ion-card-header>
-              <ion-card-subtitle>{{ message.user.name }}</ion-card-subtitle>
-            </ion-card-header>
+            
           </ion-card>
         </ion-row>
       </div>
